@@ -2,10 +2,8 @@ package com.example.composeapp.ui.components.textfield
 
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.composeapp.ui.theme.primaryTextFieldBackgroundColor
 import com.example.composeapp.ui.theme.primaryTextFieldFocusedBorderColor
