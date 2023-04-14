@@ -20,7 +20,6 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.composeapp.ui.components.button.PrimaryButton
 import com.example.composeapp.ui.components.textfield.MainTextField
@@ -39,6 +38,14 @@ fun SessionPage() {
         mutableStateOf("")
     }
 
+    var isUserError by remember {
+        mutableStateOf(false)
+    }
+
+    var isPasswordError by remember {
+        mutableStateOf(false)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -53,7 +60,8 @@ fun SessionPage() {
             ),
             placeHolder = "Introduce your user",
             label = "User",
-            value = user
+            value = user,
+            isError = isUserError
         ) {
             user = it
         }
@@ -65,15 +73,24 @@ fun SessionPage() {
                 imeAction = ImeAction.Done
             ),
             visualTransformation = PasswordVisualTransformation(),
-            keyboardAction = KeyboardActions(onDone = { focusManager.clearFocus() }),
+            keyboardAction = KeyboardActions(
+                onDone = {
+                    focusManager.clearFocus()
+                    isUserError = user != "admin"
+                    isPasswordError = password != "admin"
+                }
+            ),
             placeHolder = "Introduce your password",
             label = "Password",
-            value = password
+            value = password,
+            isError = isPasswordError
         ) {
             password = it
         }
         Spacer(modifier = Modifier.height(mediumDimen))
         PrimaryButton(text = "Log in") {
+            isUserError = user != "admin"
+            isPasswordError = password != "admin"
         }
     }
 }

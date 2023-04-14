@@ -26,6 +26,7 @@ fun MainTextField(
     placeHolder: String,
     label: String,
     value: String = "",
+    isError: Boolean = false,
     onValueChanged: (String) -> Unit
 ) {
     OutlinedTextField(
@@ -36,6 +37,7 @@ fun MainTextField(
         placeholder = { Text(text = placeHolder) },
         label = { Text(text = label) },
         value = value,
+        isError = isError,
         onValueChange = onValueChanged,
         colors = TextFieldDefaults.outlinedTextFieldColors(
             containerColor = primaryTextFieldBackgroundColor,
