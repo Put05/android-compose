@@ -1,5 +1,7 @@
 package com.example.composeapp.ui.components.textfield
 
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
@@ -14,9 +16,19 @@ import com.example.composeapp.ui.theme.primaryTextFieldUnfocusedBorderColor
 import com.example.composeapp.ui.theme.primaryTextFieldUnfocusedLabelColor
 
 @Composable
-fun MainTextField(modifier: Modifier = Modifier, placeHolder: String, label: String, value: String = "", onValueChanged: (String) -> Unit) {
+fun MainTextField(
+    modifier: Modifier = Modifier,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardAction: KeyboardActions = KeyboardActions.Default,
+    placeHolder: String,
+    label: String,
+    value: String = "",
+    onValueChanged: (String) -> Unit
+) {
     OutlinedTextField(
         modifier = modifier,
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardAction,
         placeholder = { Text(text = placeHolder) },
         label = { Text(text = label) },
         value = value,
