@@ -3,7 +3,7 @@ package com.example.composeapp.ui.activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.example.composeapp.ui.page.ComponentsPage
+import com.example.composeapp.ui.page.movies.MoviesPage
 import com.example.composeapp.ui.theme.ComposeAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -11,7 +11,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeAppTheme {
-                ComponentsPage()
+                MoviesPage()
             }
         }
     }
