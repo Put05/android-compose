@@ -18,6 +18,14 @@ val LightColorScheme = lightColorScheme(
     tertiary = Pink40
 )
 
+// region Surface
+
+val primarySurfaceBackground: Color
+    @Composable
+    get() = if (isSystemInDarkTheme()) Black else White
+
+// endregion
+
 // region Text
 
 val primaryTextColor: Color
