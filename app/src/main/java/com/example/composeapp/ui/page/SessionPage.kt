@@ -10,10 +10,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
@@ -21,30 +19,16 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.composeapp.ui.components.button.PrimaryButton
 import com.example.composeapp.ui.components.textfield.MainTextField
 import com.example.composeapp.ui.theme.mediumDimen
 import com.example.composeapp.ui.theme.smallDimen
 
 @Composable
-fun SessionPage() {
+fun SessionPage(sessionViewModel: SessionViewModel = viewModel()) {
     val focusManager = LocalFocusManager.current
-
-    var user by remember {
-        mutableStateOf("")
-    }
-
-    var password by remember {
-        mutableStateOf("")
-    }
-
-    var isUserError by remember {
-        mutableStateOf(false)
-    }
-
-    var isPasswordError by remember {
-        mutableStateOf(false)
-    }
+    val uiState by sessionViewModel.uiState.collectAsState()
 
     Column(
         modifier = Modifier
@@ -60,10 +44,10 @@ fun SessionPage() {
             ),
             placeHolder = "Introduce your user",
             label = "User",
-            value = user,
-            isError = isUserError
+            value = uiState.user,
+            isError = uiState.isUserError
         ) {
-            user = it
+            sessionViewModel.onUserChanged(user = it)
         }
         Spacer(modifier = Modifier.height(smallDimen))
         MainTextField(
@@ -76,21 +60,19 @@ fun SessionPage() {
             keyboardAction = KeyboardActions(
                 onDone = {
                     focusManager.clearFocus()
-                    isUserError = user != "admin"
-                    isPasswordError = password != "admin"
+                    sessionViewModel.onKeyBoardDonePressed()
                 }
             ),
             placeHolder = "Introduce your password",
             label = "Password",
-            value = password,
-            isError = isPasswordError
+            value = uiState.password,
+            isError = uiState.isPasswordError
         ) {
-            password = it
+            sessionViewModel.onPassChanged(password = it)
         }
         Spacer(modifier = Modifier.height(mediumDimen))
         PrimaryButton(text = "Log in") {
-            isUserError = user != "admin"
-            isPasswordError = password != "admin"
+            sessionViewModel.onLogInPressed()
         }
     }
 }
