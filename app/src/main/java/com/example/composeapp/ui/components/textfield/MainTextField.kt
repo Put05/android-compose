@@ -7,6 +7,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.composeapp.ui.theme.primaryTextFieldBackgroundColor
 import com.example.composeapp.ui.theme.primaryTextFieldFocusedBorderColor
@@ -20,6 +22,7 @@ fun MainTextField(
     modifier: Modifier = Modifier,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardAction: KeyboardActions = KeyboardActions.Default,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
     placeHolder: String,
     label: String,
     value: String = "",
@@ -29,6 +32,7 @@ fun MainTextField(
         modifier = modifier,
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardAction,
+        visualTransformation = visualTransformation,
         placeholder = { Text(text = placeHolder) },
         label = { Text(text = label) },
         value = value,
