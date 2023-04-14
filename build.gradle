@@ -10,8 +10,15 @@ plugins {
     id("io.gitlab.arturbosch.detekt").version("1.22.0")
 }
 
+
+
 allprojects {
     apply plugin: 'io.gitlab.arturbosch.detekt'
+
+    detekt {
+        config = files("$rootDir/config/detekt.yml")
+        buildUponDefaultConfig = true
+    }
 
     dependencies {
         detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:1.22.0"
