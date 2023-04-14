@@ -1,4 +1,4 @@
-package com.example.composeapp.ui.page
+package com.example.composeapp.ui.page.session
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

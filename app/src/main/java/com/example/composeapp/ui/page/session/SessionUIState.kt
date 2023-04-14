@@ -1,4 +1,4 @@
-package com.example.composeapp.ui.page
+package com.example.composeapp.ui.page.session
 
 data class SessionUIState(
     val user: String = "",
